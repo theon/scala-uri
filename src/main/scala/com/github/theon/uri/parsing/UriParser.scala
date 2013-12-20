@@ -112,7 +112,7 @@ object UriParser extends Parser {
     QueryString(tuples.toVector)
 
   def toPathParts(pathParts: List[(String,ParamSeq)]) = {
-    val pp = pathParts.map(pp => {
+    val pp = pathParts.filter(f => f._1.nonEmpty).map(pp => {
       val (plain, matrixParams) = pp
       PathPart(plain, matrixParams.toVector)
     })
