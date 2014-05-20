@@ -1,7 +1,7 @@
 package com.netaporter.uri.config
 
 import com.netaporter.uri.encoding.{NoopEncoder, UriEncoder, PercentEncoder}
-import com.netaporter.uri.decoding.{PercentDecoder, UriDecoder}
+import com.netaporter.uri.decoding.{PlusDecoder, PercentDecoder, UriDecoder}
 import PercentEncoder._
 
 /**
@@ -25,8 +25,8 @@ object UriConfig {
   val default = UriConfig(pathEncoder = PercentEncoder(PATH_CHARS_TO_ENCODE),
                           queryEncoder = PercentEncoder(QUERY_CHARS_TO_ENCODE),
                           fragmentEncoder = PercentEncoder(),
-                          pathDecoder = PercentDecoder,
-                          queryDecoder = PercentDecoder,
+                          pathDecoder = PercentDecoder andThen PlusDecoder,
+                          queryDecoder = PercentDecoder andThen PlusDecoder,
                           fragmentDecoder = PercentDecoder,
                           charset = "UTF-8")
 

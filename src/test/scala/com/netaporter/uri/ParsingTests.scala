@@ -124,10 +124,11 @@ class ParsingTests extends FlatSpec with Matchers {
   }
 
   "exotic/reserved characters in query string" should "be decoded" in {
-    val q = "weird%3D%26key=strange%25value&arrow=%E2%87%94"
+    val q = "weird%3D%26key=strange%25value&arrow=%E2%87%94&spaces=Hello+World"
     val parsedQueryString = new UriParser(q, config.UriConfig.default)._queryString.run().get
     parsedQueryString.params("weird=&key") should equal(Seq("strange%value"))
     parsedQueryString.params("arrow") should equal(Seq("⇔"))
+    parsedQueryString.params("spaces") should equal(Seq("Hello World"))
   }
 
   "exotic/reserved characters in user info" should "be decoded" in {
