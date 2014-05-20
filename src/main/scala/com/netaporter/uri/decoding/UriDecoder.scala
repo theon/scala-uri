@@ -13,4 +13,12 @@ trait UriDecoder {
 
   def decodeTuple(kv: Param) =
     decode(kv._1) -> decode(kv._2)
+
+
+  def andThen( d: UriDecoder) : UriDecoder = {
+     val base = this
+     new UriDecoder {
+        override def decode(u: String): String = d.decode(base.decode(u))
+     }
+  }
 }
