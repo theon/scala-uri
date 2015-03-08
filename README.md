@@ -1,5 +1,7 @@
 # scala-uri
 
+[![Join the chat at https://gitter.im/NET-A-PORTER/scala-uri](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/NET-A-PORTER/scala-uri?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 [![Build Status](https://secure.travis-ci.org/NET-A-PORTER/scala-uri.png?branch=master)](https://travis-ci.org/NET-A-PORTER/scala-uri?branch=master)
 
 `scala-uri` is a small Scala library that helps you work with URIs. It has the following features:
