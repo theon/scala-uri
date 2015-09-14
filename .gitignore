@@ -3,7 +3,7 @@ target/
 *.ipr
 *.iws
 .idea/
-
+.lib/
 .project
 
 # OS X
