@@ -4,8 +4,10 @@ import com.netaporter.uri.inet.PublicSuffixes
 import com.netaporter.uri.parsing.UriParser
 import com.netaporter.uri.config.UriConfig
 import com.netaporter.uri.Parameters.Param
+import com.google.common.net.InternetDomainName
 import scala.collection.GenTraversableOnce
 import scala.collection.Seq
+import scala.util.{Try, Success, Failure}
 
 /**
  * http://tools.ietf.org/html/rfc3986
@@ -254,18 +256,37 @@ case class Uri (
     copy(query = query.removeAll())
   }
 
-  def publicSuffix: Option[String] = {
-    for {
-      h <- host
-      longestMatch <- PublicSuffixes.trie.longestMatch(h.reverse)
-    } yield longestMatch.reverse
+
+  private def getPublicSuffix(domain: String): Option[String] ={
+    val internetDomainName: InternetDomainName = InternetDomainName.from(domain)
+    val ps = Try(internetDomainName.publicSuffix())
+    ps match {
+      case Success(publicSuffix) =>
+        Some(publicSuffix.toString())
+      case Failure(e) =>
+        e.printStackTrace()
+        None
+    }
   }
 
-  def publicSuffixes: Seq[String] = {
-    for {
-      h <- host.toSeq
-      m <- PublicSuffixes.trie.matches(h.reverse)
-    } yield m.reverse
+  def publicSuffix: Option[String] = {
+    host match {
+      case Some(h) =>
+        getPublicSuffix(h)
+      case None =>
+        None
+    }
+  }
+
+  def isTopPrivateDomain: Boolean = {
+    host match {
+      case Some(h) =>
+        val trimmedHost = if (h.contains("www.")) h.substring(4) else h
+        val internetDomainName: InternetDomainName = InternetDomainName.from(trimmedHost)
+        internetDomainName.isTopPrivateDomain
+      case None =>
+        false
+    }
   }
 
   override def toString = toString(UriConfig.default)
