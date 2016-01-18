@@ -41,6 +41,8 @@ libraryDependencies += "org.parboiled" %% "parboiled" % "2.1.0"
 
 libraryDependencies += "io.spray" %%  "spray-json" % "1.3.2"
 
+libraryDependencies += "com.google.guava" % "guava" % "16.0"
+
 libraryDependencies += "org.scalatest" %% "scalatest" % "2.1.4" % "test"
 
 parallelExecution in Test := false

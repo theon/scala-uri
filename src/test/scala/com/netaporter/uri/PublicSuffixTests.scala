@@ -10,11 +10,6 @@ class PublicSuffixTests extends FlatSpec with Matchers {
     uri.publicSuffix should equal(Some("co.uk"))
   }
 
-  "Uri publicSuffixes method" should "match the all public suffixes" in {
-    val uri = Uri.parse("http://www.google.co.uk/blah")
-    uri.publicSuffixes should equal(Seq("co.uk", "uk"))
-  }
-
   it should "return None for relative URLs" in {
     val uri = Uri.parse("/blah")
     uri.publicSuffix should equal(None)
