@@ -8,7 +8,7 @@ version       := "0.4.15"
 
 scalaVersion  := "2.11.7"
 
-crossScalaVersions := Seq("2.10.5", "2.11.7")
+crossScalaVersions := Seq("2.10.5", "2.11.7", "2.11.8")
 
 def coverageEnabled(scalaVersion: String) = scalaVersion match {
   case v if v startsWith "2.10" => false
