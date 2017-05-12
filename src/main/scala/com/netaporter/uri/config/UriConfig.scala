@@ -19,7 +19,7 @@ case class UriConfig(userInfoEncoder: UriEncoder,
                      matrixParams: Boolean,
                      charset: String) {
 
-  def withNoEncoding = copy(pathEncoder = NoopEncoder, queryEncoder = NoopEncoder, fragmentEncoder = NoopEncoder)
+  def withNoEncoding = copy(userInfoEncoder = NoopEncoder, pathEncoder = NoopEncoder, queryEncoder = NoopEncoder, fragmentEncoder = NoopEncoder)
 
 }
 
